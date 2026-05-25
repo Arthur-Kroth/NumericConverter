@@ -2,35 +2,43 @@ package com.model;
 
 public class Conversor {
     
-    public String binaryToDeci(String binario) {
+    public double binaryToDeci(String binario) {
         
-        if (binario == null || binario.isEmpty()) {
-            throw new IllegalArgumentException("Binario Invalido");
-        }
+        if (binario == null || binario.isEmpty()) throw new IllegalArgumentException("Binario Invalido");
+        binario = binario.replace(",", ".");
+        String[] partes = binario.split("\\.", 2);
+        long parteIntDeci = (long) Integer.parseInt(partes[0], 2);
         
-        String[] partes = binario.split("\\.");
-        
-        String parteIntDeci = Integer.toString(Integer.parseInt(partes[0], 2));
-        String parteFracDeci = "";
-        
+        double somaFracao = 0;
         if (partes.length > 1) {
-            String fracao = partes[1];
-            double somaFracao = 0;
-            
-            for (int i = 0; i < fracao.length(); i++) {
-                char bit = fracao.charAt(i);
+            for (int i = 0; i < partes[1].length(); i++) {
+                char bit = partes[1].charAt(i);
+                if (bit < '0' || bit > '1') throw new IllegalArgumentException("Digito invalido na fracao");
                 if (bit == '1') {
-                    somaFracao += Math.pow(2, -(i+1));
+                    somaFracao += Math.pow(2, -(i + 1));
                 }
             }
-            parteFracDeci = String.valueOf(somaFracao).substring(1);
         }
         
-        return parteIntDeci + parteFracDeci;
+        return parteIntDeci + somaFracao;
     }
     
     
-    public String binaryToOctal() {
+    public double octalToDeci(String octal) {
+        if (octal == null || octal.isEmpty()) throw new IllegalArgumentException("Octal Invalido");
+        octal = octal.replace(",", ".");
+        String[] partes = octal.split("\\.", 2);
+        long parteIntOct = (long) (Integer.parseInt(partes[0], 8));
         
+        double somaFracao = 0;
+        if (partes.length > 1) {
+            for (int i = 0; i < partes[1].length(); i++){
+                int bit = partes[1].charAt(i) - '0';
+                if (bit < 0 || bit > 7) throw new IllegalArgumentException("Digito invalido na fracao");
+                
+                somaFracao += bit * Math.pow(8, -(i + 1));
+            }
+        }
+        return parteIntOct + somaFracao;
     }
 }
