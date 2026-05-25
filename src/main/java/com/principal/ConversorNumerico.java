@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ConversorNumerico {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         Conversor conversor = new Conversor();
         Scanner sc = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class ConversorNumerico {
         while (i == false) {
             
             System.out.println("[1] Converter Binario");
-            System.out.println("[2] Converter Octadecimal");
+            System.out.println("[2] Converter Octal");
             System.out.println("[3] Converter Decimal");
             System.out.println("[4] Converter Hexadecimal");
             System.out.println("[5] Sair");
@@ -23,13 +23,19 @@ public class ConversorNumerico {
             int escolha = sc.nextInt();
             sc.nextLine();
             
+            String numero ="";
+            
             switch (escolha) {
                 case 1:
                     System.out.print("Qual numero deseja converter? ");
-                    String numero = sc.nextLine();
+                    numero = sc.nextLine();
                     System.out.println("O numero " + numero + " em decimal eh: " + conversor.binaryToDeci(numero));
                     break;
-                case 2: System.out.println("Fodase?"); break;
+                case 2:
+                    System.out.print("Qual numero deseja converter? ");
+                    numero = sc.nextLine();
+                    System.out.println("O numero " + numero + " em decimal eh: " + conversor.octalToDeci(numero));
+                    break;
                 case 3: System.out.println("Fodase?"); break;
                 case 4: System.out.println("Fodase?"); break;
                 case 5: System.exit(0); break;
