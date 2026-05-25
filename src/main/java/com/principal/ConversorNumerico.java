@@ -1,0 +1,40 @@
+package com.principal;
+
+import com.model.Conversor;
+import java.util.Scanner;
+
+public class ConversorNumerico {
+
+    public static void main(String[] args) {
+        
+        Conversor conversor = new Conversor();
+        Scanner sc = new Scanner(System.in);
+        
+        boolean i = false;
+        
+        while (i == false) {
+            
+            System.out.println("[1] Converter Binario");
+            System.out.println("[2] Converter Octadecimal");
+            System.out.println("[3] Converter Decimal");
+            System.out.println("[4] Converter Hexadecimal");
+            System.out.println("[5] Sair");
+
+            int escolha = sc.nextInt();
+            sc.nextLine();
+            
+            switch (escolha) {
+                case 1:
+                    System.out.print("Qual numero deseja converter? ");
+                    String numero = sc.nextLine();
+                    System.out.println("O numero " + numero + " em decimal eh: " + conversor.binaryToDeci(numero));
+                    break;
+                case 2: System.out.println("Fodase?"); break;
+                case 3: System.out.println("Fodase?"); break;
+                case 4: System.out.println("Fodase?"); break;
+                case 5: System.exit(0); break;
+                default: System.out.println("Numero invalido"); break;
+            }
+        }
+    }
+}
