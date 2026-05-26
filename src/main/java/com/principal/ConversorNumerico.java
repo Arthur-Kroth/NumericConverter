@@ -36,8 +36,16 @@ public class ConversorNumerico {
                     numero = sc.nextLine();
                     System.out.println("O numero " + numero + " em decimal eh: " + conversor.octalToDeci(numero));
                     break;
-                case 3: System.out.println("Fodase?"); break;
-                case 4: System.out.println("Fodase?"); break;
+                case 3:
+                    System.out.print("Qual numero deseja converter? ");
+                    numero = sc.nextLine();
+                    System.out.println("O numero " + numero + " em decimal eh: " + conversor.deciToBinary(Double.parseDouble(numero)));
+                    break;
+                case 4:
+                    System.out.print("Qual numero deseja converter? ");
+                    numero = sc.nextLine();
+                    System.out.println("O numero " + numero + " em decimal eh: " + conversor.hexaToDeci(numero));
+                    break;
                 case 5: System.exit(0); break;
                 default: System.out.println("Numero invalido"); break;
             }

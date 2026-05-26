@@ -41,4 +41,23 @@ public class Conversor {
         }
         return parteIntOct + somaFracao;
     }
+    
+    public double hexaToDeci(String hexa) {
+        if (hexa == null || hexa.isEmpty()) throw new IllegalArgumentException("Hexadecimal Invalido");
+        hexa = hexa.replace(",", ".");
+        String[] partes = hexa.split("\\.", 2);
+        long parteIntHexa = Long.parseUnsignedLong(partes[0], 16);
+        
+        double somaFracao = 0;
+        if (partes.length > 1) {
+            for (int i = 0; i < partes[1].length(); i++){
+                int bit = Character.digit(partes[1].charAt(i), 16);
+                
+                if (bit == -1) throw new IllegalArgumentException("Caractere inválido na fração");
+                
+                somaFracao += bit * Math.pow(16, -(i + 1));
+            }
+        }
+        return parteIntHexa + somaFracao;
+    }
 }
