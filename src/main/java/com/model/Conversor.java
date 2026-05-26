@@ -60,4 +60,34 @@ public class Conversor {
         }
         return parteIntHexa + somaFracao;
     }
+    
+    public String deciToBinary(double deci) {
+        boolean isNegative = deci < 0;
+        deci = Math.abs(deci);
+
+        long partInt = (long) deci;
+        double frac = deci - partInt;
+
+        String somaFrac = "";
+
+        int maxFracDigits = 32; 
+
+        if (frac > 0) {
+            somaFrac += ",";
+
+            while (frac > 0 && somaFrac.length() <= maxFracDigits) {
+                frac *= 2;
+
+                if (frac >= 1) {
+                    somaFrac += "1";
+                    frac -= 1;
+                } else {
+                    somaFrac += "0";
+                }
+            }
+        }
+
+        String resultadoBinario = Long.toBinaryString(partInt) + somaFrac;
+        return isNegative ? "-" + resultadoBinario : resultadoBinario;
+    }
 }
