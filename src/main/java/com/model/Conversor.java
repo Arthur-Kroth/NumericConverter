@@ -115,4 +115,28 @@ public class Conversor {
         String resultadoOctal = Long.toOctalString(parteInt) + somaFrac;
         return isNegative ? "-" + resultadoOctal : resultadoOctal;
     }
+
+    public String deciToHexa(double deci) {
+        boolean isNegative = deci < 0;
+        deci = Math.abs(deci);
+
+        long parteInt = (long) deci;
+        double frac = deci - parteInt;
+
+        String somaFrac = "";
+        if (frac > 1e-10) {
+            somaFrac = ",";
+            int maxDigits = 16;
+            while (frac > 1e-10 && maxDigits-- > 0) {
+                frac *= 16;
+                int digito = (int) frac;
+                // Converte 10-15 para A-F
+                somaFrac += Character.toUpperCase(Character.forDigit(digito, 16));
+                frac -= digito;
+            }
+        }
+
+        String resultado = Long.toHexString(parteInt).toUpperCase() + somaFrac;
+        return isNegative ? "-" + resultado : resultado;
+    }
 }
