@@ -65,17 +65,15 @@ public class Conversor {
         boolean isNegative = deci < 0;
         deci = Math.abs(deci);
 
-        long partInt = (long) deci;
-        double frac = deci - partInt;
+        long parteInt = (long) deci;
+        double frac = deci - parteInt;
 
         String somaFrac = "";
-
-        int maxFracDigits = 32; 
-
+        
         if (frac > 0) {
             somaFrac += ",";
 
-            while (frac > 0 && somaFrac.length() <= maxFracDigits) {
+            while (frac > 0 && somaFrac.length() <= 16) {
                 frac *= 2;
 
                 if (frac >= 1) {
@@ -87,7 +85,34 @@ public class Conversor {
             }
         }
 
-        String resultadoBinario = Long.toBinaryString(partInt) + somaFrac;
+        String resultadoBinario = Long.toBinaryString(parteInt) + somaFrac;
         return isNegative ? "-" + resultadoBinario : resultadoBinario;
+    }
+    
+    public String deciToOctal(double deci) {
+        boolean isNegative = deci <0;
+        deci = Math.abs(deci);
+        
+        long parteInt = (long) deci;
+        double frac = deci - parteInt;
+        
+        String somaFrac = "";
+
+        if (frac > 0) {
+            somaFrac = ",";
+            
+            while (frac > 0 && somaFrac.length() <= 16) {
+                frac *= 8;
+                int parteIntOct = (int) frac;
+                if (frac >= 1) {
+                    somaFrac += parteIntOct;
+                    frac -= parteIntOct;
+                } else {
+                    somaFrac += "0";
+                }
+            }
+        }
+        String resultadoOctal = Long.toOctalString(parteInt) + somaFrac;
+        return isNegative ? "-" + resultadoOctal : resultadoOctal;
     }
 }
