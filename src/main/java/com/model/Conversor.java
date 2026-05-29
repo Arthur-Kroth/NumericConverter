@@ -3,7 +3,6 @@ package com.model;
 public class Conversor {
     
     public double binaryToDeci(String binario) {
-        
         if (binario == null || binario.isEmpty()) throw new IllegalArgumentException("Binario Invalido");
         binario = binario.replace(",", ".");
         String[] partes = binario.split("\\.", 2);
@@ -138,5 +137,19 @@ public class Conversor {
 
         String resultado = Long.toHexString(parteInt).toUpperCase() + somaFrac;
         return isNegative ? "-" + resultado : resultado;
+    }
+    
+    public double parseDeciInput(String s) {
+        if (s.isEmpty()) throw new IllegalArgumentException("Campo decimal está vazio.");
+        return Double.parseDouble(s.replace(",", "."));
+    }
+    
+    public String formatDeciOutput(double value) {
+        long intPart = (long) value;
+        if (Math.abs(value - intPart) < 1e-12) return String.valueOf(intPart);
+        // Limit to ~10 significant decimal places to avoid floating-point noise
+        String raw = String.format("%.10f", value).replaceAll("0+$", "");
+        if (raw.endsWith(".")) raw = raw.substring(0, raw.length() - 1);
+        return raw.replace(".", ",");
     }
 }
